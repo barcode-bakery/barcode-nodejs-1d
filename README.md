@@ -29,40 +29,59 @@ For a full example of how to use each symbology type, visit our [API page][5].
 
 ### Displaying a Code 128 on the screen
 ```javascript
+import { createServer } from 'http';
 import { BCGColor, BCGDrawing, BCGFont } from 'barcode-bakery-common';
 import { BCGcode128 } from 'barcode-bakery-1d';
+import { parse } from 'querystring';
 
-use BarcodeBakery\Common\BCGFontFile;
-use BarcodeBakery\Common\BCGColor;
-use BarcodeBakery\Common\BCGDrawing;
-use BarcodeBakery\Barcode\BCGcode128;
+const defaultText = 'abc123';
 
-let font = new BCGFontFile('Arial', 18);
-let colorFront = new BCGColor(0, 0, 0);
-let colorBack = new BCGColor(255, 255, 255);
+let font = new BCGFont('Arial', 18);
+let colorBlack = new BCGColor(0, 0, 0);
+let colorWhite = new BCGColor(255, 255, 255);
 
-// Barcode Part
-let code = new BCGcode128();
-code.setScale(2); // Resolution
-code.setThickness(30); // Thickness
-code.setBackgroundColor(colorWhite); // Color of spaces
-code.setForegroundColor(colorBlack); // Color of bars
-code.setFont(font); // Font (or 0)
-code.setStart(null);
-code.setTilde(true);
-code.parse('a123'); // Text
+let getDrawing = function (text) {
+    let drawException = null,
+        barcode = null;
+    try {
+        // Barcode Part
+        let code = new BCGcode128();
+        code.setScale(2); // Resolution
+        code.setThickness(30); // Thickness
+        code.setBackgroundColor(colorWhite); // Color of spaces
+        code.setForegroundColor(colorBlack); // Color of bars
+        code.setFont(font); // Font (or 0)
+        code.setStart(null);
+        code.setTilde(true);
+        code.parse(text); // Text
+        barcode = code;
+    } catch (exception) {
+        drawException = exception;
+    }
 
-let drawing = new BCGDrawing(code, colorWhite);
-drawing.toBuffer(BCGDrawing.ImageFormat.Png, function (err, buffer) {
-    response.writeHead(200, { 'Content-Type': 'image/png' });
-    response.end(buffer);
-});
+    let drawing = new BCGDrawing(barcode, colorWhite);
+    if (drawException) {
+        drawing.drawException(drawException);
+    }
+
+    return drawing;
+};
+
+createServer(function (request, response) {
+    // Don't forget to sanitize user inputs.
+    let drawing = getDrawing(parse(request.url).query?.toString() || defaultText);
+    drawing.toBuffer(BCGDrawing.ImageFormat.Png, function (err, buffer) {
+        response.writeHead(200, { 'Content-Type': 'image/png' });
+        response.end(buffer);
+    });
+}).listen(8124);
+console.log('Server running at http://127.0.0.1:8124/');
 ```
 
 ### Saving the image to a file
-Replace the last line of the previous code with the following:
+Replace the last lines of the previous code with the following:
 ```javascript
-var drawing = new BCGDrawing(code, colorBack);
+var drawing = new BCGDrawing(code, colorWhite);
 drawing.save('image.png', BCGDrawing.ImageFormat.Png, function() {
     console.log('Done.');
 });
