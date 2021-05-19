@@ -1,11 +1,19 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Code 11.
  */
 class BCGcode11 extends BCGBarcode1D {
+    /**
+     * Creates a Code 11 barcode.
+     */
     constructor() {
         super();
 

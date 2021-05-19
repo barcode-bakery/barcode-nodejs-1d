@@ -1,9 +1,14 @@
 'use strict';
 
-import { BCGBarcode, BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode, BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * EAN-8.
  */
 class BCGean8 extends BCGBarcode1D {
     /**
@@ -16,6 +21,9 @@ class BCGean8 extends BCGBarcode1D {
      */
     protected labelRight: BCGLabel | null = null;
 
+    /**
+     * Creates an EAN-8 barcode.
+     */
     constructor() {
         super();
 

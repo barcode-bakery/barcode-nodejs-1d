@@ -1,14 +1,22 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Interleaved 2 of 5.
  */
 class BCGi25 extends BCGBarcode1D {
     private checksum: boolean = false;
     private ratio: number = 2;
 
+    /**
+     * Creates an Interleaved 2 of 5 barcode.
+     */
     constructor() {
         super();
 

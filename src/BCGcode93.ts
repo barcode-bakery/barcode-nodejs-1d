@@ -1,9 +1,14 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Code 93.
  */
 class BCGcode93 extends BCGBarcode1D {
     private static readonly EXTENDED_1: number = 43;
@@ -24,6 +29,9 @@ class BCGcode93 extends BCGBarcode1D {
      */
     protected indcheck: number[] | null = null;
 
+    /**
+     * Creates a Code 93 barcode.
+     */
     constructor() {
         super();
 
@@ -89,8 +97,8 @@ class BCGcode93 extends BCGBarcode1D {
     parse(text: string): void {
         this.text = text;
 
-        let data = [];
-        let indcheck = [];
+        let data: string[] = [];
+        let indcheck: number[] = [];
 
         let c = this.text.length;
         for (let i = 0; i < c; i++) {
@@ -138,7 +146,7 @@ class BCGcode93 extends BCGBarcode1D {
      *
      * @param image The surface.
      */
-    draw(image: draw.Surface) {
+    draw(image: draw.Surface): void {
         if (this.data === null || this.checksumValue === null) {
             throw new Error();
         }
@@ -191,7 +199,7 @@ class BCGcode93 extends BCGBarcode1D {
     /**
      * Validates the input.
      */
-    protected validate() {
+    protected validate(): void {
         if (this.data === null) {
             throw new Error();
         }

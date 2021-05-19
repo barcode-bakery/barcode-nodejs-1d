@@ -1,13 +1,21 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, draw, Utility } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, draw, Utility } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Standard 2 of 5.
  */
 class BCGs25 extends BCGBarcode1D {
     private checksum: boolean = false;
 
+    /**
+     * Creates an Standard 2 of 5 barcode.
+     */
     constructor() {
         super();
         this.keys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];

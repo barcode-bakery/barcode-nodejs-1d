@@ -12,9 +12,9 @@ Installation
 ------------
 There are two ways to install our library:
 
-* With composer, run the following command:
+* Run the following command:
 ```bash
-$ npm install barcode-bakery-1d
+$ npm install @barcode-bakery/barcode-1d @barcode-bakery/barcode-common
 ```
 * Or, download the library on our [website][3], and follow our [developer's guide][4].
 
@@ -27,14 +27,16 @@ Example usages
 --------------
 For a full example of how to use each symbology type, visit our [API page][5].
 
+You can also visit the [GitHub example page][34].
+
 ### Displaying a Code 128 on the screen
 ```javascript
 import { createServer } from 'http';
-import { BCGColor, BCGDrawing, BCGFont } from 'barcode-bakery-common';
-import { BCGcode128 } from 'barcode-bakery-1d';
 import { parse } from 'querystring';
+import { BCGColor, BCGDrawing, BCGFont } from '@barcode-bakery/barcode-common';
+import { BCGcode128 } from '@barcode-bakery/barcode-1d';
 
-const defaultText = 'abc123';
+const defaultText = 'a123';
 
 let font = new BCGFont('Arial', 18);
 let colorBlack = new BCGColor(0, 0, 0);
@@ -81,7 +83,7 @@ console.log('Server running at http://127.0.0.1:8124/');
 ### Saving the image to a file
 Replace the last lines of the previous code with the following:
 ```javascript
-var drawing = new BCGDrawing(code, colorWhite);
+let drawing = new BCGDrawing(code, colorWhite);
 drawing.save('image.png', BCGDrawing.ImageFormat.Png, function() {
     console.log('Done.');
 });
@@ -120,7 +122,12 @@ Supported types
 
 Other libraries available for purchase
 --------------------------------------
-* [PDF417][30]
+* [Aztec][35]
+* [Databar Expanded][36]
+* [DataMatrix][37]
+* [MaxiCode][38]
+* [PDF417][39]
+* [QRCode][40]
 
 
 [1]: https://www.barcodebakery.com
@@ -145,6 +152,12 @@ Other libraries available for purchase
 [23]: https://www.barcodebakery.com/en/docs/nodejs/barcode/upcext5/api
 [24]: https://www.barcodebakery.com/en/docs/nodejs/barcode/upca/api
 [25]: https://www.barcodebakery.com/en/docs/nodejs/barcode/upce/api
-[30]: https://www.barcodebakery.com/en/docs/nodejs/barcode/pdf417/api
 [32]: https://github.com/barcode-bakery/barcode-dotnet-1d/
 [33]: https://github.com/barcode-bakery/barcode-php-1d/
+[34]: https://github.com/barcode-bakery/barcode-nodejs-example-1d/
+[35]: https://www.barcodebakery.com/en/docs/nodejs/barcode/aztec/api
+[36]: https://www.barcodebakery.com/en/docs/nodejs/barcode/databarexpanded/api
+[37]: https://www.barcodebakery.com/en/docs/nodejs/barcode/datamatrix/api
+[38]: https://www.barcodebakery.com/en/docs/nodejs/barcode/maxicode/api
+[39]: https://www.barcodebakery.com/en/docs/nodejs/barcode/pdf417/api
+[40]: https://www.barcodebakery.com/en/docs/nodejs/barcode/qrcode/api

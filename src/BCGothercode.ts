@@ -1,11 +1,21 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Other Code.
+ * Starting with a bar and altern to space, bar, ...
+ * 0 is the smallest.
  */
 class BCGothercode extends BCGBarcode1D {
+    /**
+     * Creates an other type barcode.
+     */
     constructor() {
         super();
         this.keys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];

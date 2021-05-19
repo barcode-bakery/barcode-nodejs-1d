@@ -1,7 +1,7 @@
 ﻿'use strict';
 
-import { equal, ok } from 'assert';
-import { BCGFont, BCGBarcode1D, BCGBarcode } from 'barcode-bakery-common';
+import { strictEqual, ok } from 'assert';
+import { BCGFont, BCGBarcode1D, BCGBarcode } from '@barcode-bakery/barcode-common';
 import { BCGcodabar } from '../src/BCGcodabar';
 import { BCGcode11 } from '../src/BCGcode11';
 import { BCGcode128 } from '../src/BCGcode128';
@@ -64,17 +64,17 @@ barcodes.forEach(function (check) {
         describe('#getThickness()', function () {
             it('should return 30 by default', function () {
                 let thickness = instance.getThickness();
-                equal(30, thickness);
+                strictEqual(thickness, 30);
             });
         });
 
         describe('#label', function () {
             it('should behave properly', function () {
                 instance.setDisplayChecksum(false);
-                equal(BCGBarcode1D.AUTO_LABEL, getProtectedField('label'));
+                strictEqual(getProtectedField('label'), BCGBarcode1D.AUTO_LABEL);
 
                 instance.setLabel(null);
-                equal(instance.getLabel(), null);
+                strictEqual(instance.getLabel(), null);
             });
         });
 

@@ -1,11 +1,15 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, Utility, draw, BCGArgumentException, BCGDataInput } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, Utility, draw, BCGArgumentException, BCGDataInput } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
- *
- * @param char start
+ * Code 128.
+ * If you display the checksum on the label, you may obtain incorrect characters, since some characters are not displayable.
  */
 class BCGcode128 extends BCGBarcode1D {
     private static readonly KEYA_FNC3: number = 96;
@@ -77,6 +81,11 @@ class BCGcode128 extends BCGBarcode1D {
 
     private METHOD: { [code: number]: string };
 
+    /**
+     * Creates a Code 128 barcode.
+     *
+     * @param start The start table.
+     */
     constructor(start?: string | null) {
         super();
 
@@ -274,7 +283,7 @@ class BCGcode128 extends BCGBarcode1D {
      *
      * @param text The input.
      */
-    parse(text: BCGDataInput<BCGcode128.Code> | BCGDataInput<BCGcode128.Code>[] | string) {
+    parse(text: BCGDataInput<BCGcode128.Code> | BCGDataInput<BCGcode128.Code>[] | string): void {
         let input: BCGDataInput<BCGcode128.Code>[];
         if (typeof text === 'string') {
             input = [new BCGDataInput(BCGcode128.Code.Auto, text)];
@@ -291,11 +300,10 @@ class BCGcode128 extends BCGBarcode1D {
 
         let currentMode = this.startingText;
         for (let inp of input) {
-            if (inp.mode == BCGcode128.Code.Auto) {
+            if (inp.mode === BCGcode128.Code.Auto) {
                 seq += this.getSequence(inp.data, currentMode);
                 this.text += inp.data;
-            }
-            else {
+            } else {
                 let ret = this.invokeSetParse(inp.mode, inp.data, currentMode);
                 seq += ret.value;
                 currentMode = ret.currentMode;
@@ -436,7 +444,7 @@ class BCGcode128 extends BCGBarcode1D {
     private setStartFromText(mode: BCGcode128.Code, text: string): void {
         if (this.startingText === null) {
             // If we have a forced table at the start, we get that one...
-            if (mode != BCGcode128.Code.Auto) {
+            if (mode !== BCGcode128.Code.Auto) {
                 this.startingText = this.METHOD[mode];
                 return;
             }
@@ -692,11 +700,11 @@ class BCGcode128 extends BCGBarcode1D {
 
             // 2.
             let nxtLen = [e, e, e];
-            let nxtSeq = [];
+            let nxtSeq: { [key: number]: string } = [];
 
             // 3.
             let flag = false;
-            let posArray = [];
+            let posArray: number[] = [];
 
             // Special case, we do have a tilde and we process them
             if (this.tilde && input === '~') {
@@ -810,8 +818,8 @@ class BCGcode128 extends BCGBarcode1D {
         let ret;
         let c = seq.length;
 
-        let data = []; // code stream
-        let indcheck = []; // index for checksum
+        let data: string[] = []; // code stream
+        let indcheck: number[] = []; // index for checksum
 
         let currentEncoding = 0;
         if (this.startingText === 'A') {

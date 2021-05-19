@@ -1,16 +1,30 @@
 'use strict';
 
-import { BCGParseException, BCGArgumentException, BCGLabel, Utility } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGParseException, BCGArgumentException, BCGLabel, Utility } from '@barcode-bakery/barcode-common';
 import { BCGean13 } from './BCGean13';
 
 /**
- * Constructor.
+ * ISBN-10 and ISBN-13.
  *
- * @param int gs1
+ * You can provide an ISBN with 10 digits with or without the checksum.
+ * You can provide an ISBN with 13 digits with or without the checksum.
+ * Calculate the ISBN based on the EAN-13 encoding.
+ *
+ * The checksum is always displayed.
  */
 class BCGisbn extends BCGean13 {
     private gs1: BCGisbn.GS1;
 
+    /**
+     * Creates a ISBN barcode.
+     *
+     * @param gs1 The GS1.
+     */
     constructor(gs1?: BCGisbn.GS1 | null) {
         super();
         this.gs1 = gs1 || BCGisbn.GS1.Auto;

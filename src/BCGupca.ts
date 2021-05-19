@@ -1,10 +1,22 @@
 'use strict';
 
-import { BCGBarcode, BCGParseException, BCGLabel, draw, BCGColor } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode, BCGParseException, BCGLabel, draw, BCGColor } from '@barcode-bakery/barcode-common';
 import { BCGean13 } from './BCGean13';
 
 /**
- * Constructor.
+ * UPC-A.
+ * UPC-A contains
+ *    - 2 system digits(1 not provided, a 0 is added automatically)
+ *    - 5 manufacturer code digits
+ *    - 5 product digits
+ *    - 1 checksum digit
+ *
+ * The checksum is always displayed.
  */
 class BCGupca extends BCGean13 {
     /**
@@ -12,6 +24,9 @@ class BCGupca extends BCGean13 {
      */
     protected labelRight: BCGLabel | null = null;
 
+    /**
+     * Creates a UPC-A barcode.
+     */
     constructor() {
         super();
     }

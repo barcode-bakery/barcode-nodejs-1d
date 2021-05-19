@@ -1,10 +1,15 @@
 'use strict';
 
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
 import { BCGcode39 } from './BCGcode39';
-import { BCGParseException, Utility, draw } from 'barcode-bakery-common';
+import { BCGParseException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Code 39 Extended.
  */
 class BCGcode39extended extends BCGcode39 {
     private static readonly EXTENDED_1: number = 39;
@@ -22,6 +27,9 @@ class BCGcode39extended extends BCGcode39 {
      */
     protected indcheck: number[] | null = null;
 
+    /**
+     * Creates a Code 39 Extended barcode.
+     */
     constructor() {
         super();
 

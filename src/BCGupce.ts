@@ -1,9 +1,23 @@
 'use strict';
 
-import { BCGBarcode, BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode, BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * UPC-E.
+ * You can provide a UPC-A code(without dash), the code will transform
+ * it into a UPC-E format if it's possible.
+ * UPC-E contains
+ *    - 1 system digits(not displayed but coded with parity)
+ *    - 6 digits
+ *    - 1 checksum digit(not displayed but coded with parity)
+ *
+ * The text returned is the UPC-E without the checksum.
+ * The checksum is always displayed.
  */
 class BCGupce extends BCGBarcode1D {
     private readonly codeParity: number[][][];
@@ -28,6 +42,9 @@ class BCGupce extends BCGBarcode1D {
      */
     protected labelRight: BCGLabel | null = null;
 
+    /**
+     * Creates a UPC-E barcode.
+     */
     constructor() {
         super();
 

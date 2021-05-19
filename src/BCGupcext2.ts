@@ -1,13 +1,25 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * UPC Supplemental Barcode 2 digits.
+ *
+ * Working with UPC-A, UPC-E, EAN-13, EAN-8
+ * This includes 2 digits(normaly for publications)
+ * Must be placed next to UPC or EAN Code
  */
 class BCGupcext2 extends BCGBarcode1D {
     private readonly codeParity: number[][];
 
+    /**
+     * Creates a UPC supplemental 2 digits barcode.
+     */
     constructor() {
         super();
 

@@ -1,8 +1,8 @@
 ﻿'use strict';
 
 import 'mocha';
-import { equal, deepEqual } from 'assert';
-import { BCGLabel } from 'barcode-bakery-common';
+import { strictEqual, deepStrictEqual } from 'assert';
+import { BCGLabel } from '@barcode-bakery/barcode-common';
 import { BCGcode11 } from '../src/BCGcode11';
 
 let code = 'Code11',
@@ -25,25 +25,25 @@ describe(code, function () {
 
     describe('#__fields', function () {
         it('should contain the same amount of data', function () {
-            equal(getProtectedField('keys').length, getProtectedField('code').length);
+            strictEqual(getProtectedField('keys').length, getProtectedField('code').length);
         });
     });
 
     describe('#label', function () {
         it('should behave properly with some text', function () {
             instance.parse(defaultText);
-            equal(instance.getLabel(), defaultText);
+            strictEqual(instance.getLabel(), defaultText);
 
             instance.setLabel(secondText);
-            equal(instance.getLabel(), secondText);
+            strictEqual(instance.getLabel(), secondText);
         });
 
         it('should behave properly with other text', function () {
             instance.parse(secondText);
-            equal(instance.getLabel(), secondText);
+            strictEqual(instance.getLabel(), secondText);
 
             instance.setLabel(defaultText);
-            equal(instance.getLabel(), defaultText);
+            strictEqual(instance.getLabel(), defaultText);
         });
     });
 
@@ -58,7 +58,7 @@ describe(code, function () {
                 instance.setScale(scale);
                 instance.setThickness(30);
                 instance.parse(defaultText);
-                deepEqual([(textLength + 8 + checksumLength + 7) * scale, (30) * scale], instance.getDimension(0, 0));
+                deepStrictEqual(instance.getDimension(0, 0), [(textLength + 8 + checksumLength + 7) * scale, (30) * scale]);
             });
 
             it('should work with scale=2 and extra positioning', function () {
@@ -69,7 +69,7 @@ describe(code, function () {
                 instance.setScale(scale);
                 instance.setThickness(30);
                 instance.parse(defaultText);
-                deepEqual([(textLength + 8 + checksumLength + 7 + left) * scale, (30 + top) * scale], instance.getDimension(left, top));
+                deepStrictEqual(instance.getDimension(left, top), [(textLength + 8 + checksumLength + 7 + left) * scale, (30 + top) * scale]);
             });
 
             it('should work with scale=2 and extra positioning and offset', function () {
@@ -84,7 +84,7 @@ describe(code, function () {
                 instance.setOffsetX(offsetX);
                 instance.setOffsetY(offsetY);
                 instance.parse(defaultText);
-                deepEqual([(textLength + 8 + checksumLength + 7 + left + offsetX) * scale, (30 + top + offsetY) * scale], instance.getDimension(left, top));
+                deepStrictEqual(instance.getDimension(left, top), [(textLength + 8 + checksumLength + 7 + left + offsetX) * scale, (30 + top + offsetY) * scale]);
             });
         });
 
@@ -96,8 +96,8 @@ describe(code, function () {
                 instance.parse(defaultText);
                 let label = getProtectedField('defaultLabel');
                 let dimension = label.getDimension();
-                equal(label.getPosition(), BCGLabel.Position.Bottom);
-                deepEqual([(textLength + 8 + checksumLength + 7) * scale, (30) * scale + dimension[1]], instance.getDimension(0, 0));
+                strictEqual(label.getPosition(), BCGLabel.Position.Bottom);
+                deepStrictEqual(instance.getDimension(0, 0), [(textLength + 8 + checksumLength + 7) * scale, (30) * scale + dimension[1]]);
             });
 
             it('should work with scale=2', function () {
@@ -107,8 +107,8 @@ describe(code, function () {
                 instance.parse(defaultText);
                 let label = getProtectedField('defaultLabel');
                 let dimension = label.getDimension();
-                equal(label.getPosition(), BCGLabel.Position.Bottom);
-                deepEqual([(textLength + 8 + checksumLength + 7) * scale, (30) * scale + dimension[1]], instance.getDimension(0, 0));
+                strictEqual(label.getPosition(), BCGLabel.Position.Bottom);
+                deepStrictEqual(instance.getDimension(0, 0), [(textLength + 8 + checksumLength + 7) * scale, (30) * scale + dimension[1]]);
             });
         });
     });

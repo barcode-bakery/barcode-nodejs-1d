@@ -1,13 +1,31 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, BCGLabel, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * UPC Supplemental Barcode 5 digits.
+ *
+ * Working with UPC-A, UPC-E, EAN-13, EAN-8
+ * This includes 5 digits(normaly for suggested retail price)
+ * Must be placed next to UPC or EAN Code
+ * If 90000 -> No suggested Retail Price
+ * If 99991 -> Book Complimentary(normally free)
+ * If 90001 to 98999 -> Internal Purpose of Publisher
+ * If 99990 -> Used by the National Association of College Stores to mark used books
+ * If 0xxxx -> Price Expressed in British Pounds(xx.xx)
+ * If 5xxxx -> Price Expressed in U.S.dollars(US$xx.xx)
  */
 class BCGupcext5 extends BCGBarcode1D {
     private readonly codeParity: number[][];
 
+    /**
+     * Creates a UPC supplemental 5 digits barcode.
+     */
     constructor() {
         super();
         this.keys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];

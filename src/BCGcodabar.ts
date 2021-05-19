@@ -1,11 +1,19 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * Codabar.
  */
 class BCGcodabar extends BCGBarcode1D {
+    /**
+     * Creates a Codabar barcode.
+     */
     constructor() {
         super();
 
@@ -100,7 +108,7 @@ class BCGcodabar extends BCGBarcode1D {
         }
 
         // Must start by A, B, C or D
-        if (c == 0 || (this.text[0] !== 'A' && this.text[0] !== 'B' && this.text[0] !== 'C' && this.text[0] !== 'D')) {
+        if (c === 0 || (this.text[0] !== 'A' && this.text[0] !== 'B' && this.text[0] !== 'C' && this.text[0] !== 'D')) {
             throw new BCGParseException('Codabar', 'The text must start by the character A, B, C, or D.');
         }
 

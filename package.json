@@ -1,6 +1,6 @@
 {
-    "name": "barcode-bakery-1d",
-    "version": "2.0.0-alpha.2",
+    "name": "@barcode-bakery/barcode-1d",
+    "version": "2.0.0",
     "description": "Generates 1D barcodes from Node server to a file or a buffer.",
     "homepage": "https://www.barcodebakery.com",
     "author": {
@@ -40,7 +40,7 @@
         "/dist"
     ],
     "dependencies": {
-        "barcode-bakery-common": "2.0.0-alpha.1"
+        "@barcode-bakery/barcode-common": "^2.0.0"
     },
     "devDependencies": {
         "@tsconfig/node14": "^1.0.0",

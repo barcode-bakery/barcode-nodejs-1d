@@ -1,13 +1,21 @@
 'use strict';
 
-import { BCGBarcode1D, BCGParseException, BCGArgumentException, Utility, draw } from 'barcode-bakery-common';
+/*!
+ * Copyright (C) Jean-Sebastien Goupil
+ * http://www.barcodebakery.com
+ */
+
+import { BCGBarcode1D, BCGParseException, BCGArgumentException, Utility, draw } from '@barcode-bakery/barcode-common';
 
 /**
- * Constructor.
+ * MSI Plessey.
  */
 class BCGmsi extends BCGBarcode1D {
     private checksum: number = 0;
 
+    /**
+     * Creates an MSI Plessey barcode.
+     */
     constructor() {
         super();
 
