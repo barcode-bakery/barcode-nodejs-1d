@@ -154,7 +154,7 @@ Other libraries available for purchase
 [25]: https://www.barcodebakery.com/en/docs/nodejs/barcode/upce/api
 [32]: https://github.com/barcode-bakery/barcode-dotnet-1d/
 [33]: https://github.com/barcode-bakery/barcode-php-1d/
-[34]: https://github.com/barcode-bakery/barcode-nodejs-example-1d/
+[34]: https://github.com/barcode-bakery/example-nodejs-1d/
 [35]: https://www.barcodebakery.com/en/docs/nodejs/barcode/aztec/api
 [36]: https://www.barcodebakery.com/en/docs/nodejs/barcode/databarexpanded/api
 [37]: https://www.barcodebakery.com/en/docs/nodejs/barcode/datamatrix/api
