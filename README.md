@@ -2,7 +2,7 @@
     <img src="https://www.barcodebakery.com/images/BCG-Logo-SQ-GitHub.svg">
 </a></p>
 
-[Barcode Bakery][1] is library written in Node.JS, [.NET Standard][32] and [PHP][33] which allows you to generate barcodes on the fly on your server for displaying or saving.
+[Barcode Bakery][1] is a library written in Node.JS, [.NET Standard][32] and [PHP][33] which allows you to generate barcodes on the fly on your server for displaying or saving.
 
 The library has minimal dependencies in each language in order to be supported on a wide variety of web servers.
 
